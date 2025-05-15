@@ -1,29 +1,17 @@
-# Literature Review – Fake News Detection
+# Literature Review: NLP – Text Classification
 
-Approaches or solutions that have been tried before on similar projects.
+Text classification using Natural Language Processing (NLP) encompasses various methodologies, primarily focusing on categorizing text into predefined labels. It serves as the foundation for many real-world applications such as spam detection, sentiment analysis, fake news identification, and bias detection. Numerous machine learning approaches have achieved state-of-the-art results in NLP tasks. The success of these models relies on their ability to capture complex patterns and non-linear relationships within textual data.
 
-**Summary of Each Work**:
+One of the most influential works in the field of text classification is the paper titled “A C-LSTM Neural Network for Text Classification” by Zhou et al. (2015) [https://arxiv.org/abs/1511.08630v2](https://arxiv.org/abs/1511.08630v2). The authors aimed to improve sentence-level representation for classification tasks by combining Convolutional Neural Networks (CNNs) and Long Short-Term Memory (LSTM) networks. The proposed C-LSTM model first employs a CNN to extract higher-level n-gram features from raw word embeddings, then feeds these sequential features into an LSTM to capture long-range dependencies. The model outperformed standalone CNNs and LSTMs on sentiment and question classification tasks. This architecture is highly relevant to our project, as it demonstrates the advantage of hybrid deep learning models in extracting both local and sequential context from text—principles that extend into transformer-based models.
 
-- **Source 1**: [BERT for Detecting Fake News in Social Media]
+A landmark contribution to NLP came from Devlin et al. (2018) with “BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding” [https://arxiv.org/abs/1810.04805](https://arxiv.org/abs/1810.04805). This work introduced BERT, a deep bidirectional Transformer model pre-trained using masked language modeling (MLM) and next sentence prediction (NSP). Unlike previous models that processed input text in a single direction, BERT simultaneously considers both left and right context, enabling richer language understanding. Once pre-trained, BERT can be fine-tuned for a wide variety of NLP tasks with minimal architectural changes. Its performance surpassed existing benchmarks across multiple tasks including sentiment analysis and natural language inference. This work is foundational to our project, as we will fine-tune a BERT model using TensorFlow for fake news classification, benefiting from its contextual sensitivity and transfer learning capabilities.
 
-  - **Link**: [https://aclanthology.org/2020.trac-1.15/](https://aclanthology.org/2020.trac-1.15/)  
-  - **Objective**: To explore the use of pretrained language models like BERT for detecting fake news.  
-  - **Methods**: Fine-tuned BERT on a dataset of social media posts and compared it with LSTM and logistic regression baselines.  
-  - **Outcomes**: BERT outperformed all baselines significantly, especially in terms of accuracy and F1-score.  
-  - **Relation to the Project**: Justifies the use of transformer-based models like BERT within the TensorFlow ecosystem for this task.
+In the specific context of misinformation detection, the paper “BERT for Detecting Fake News in Social Media” [https://aclanthology.org/2020.trac-1.15/](https://aclanthology.org/2020.trac-1.15/) demonstrated how BERT can be fine-tuned for classifying social media content as fake or factual. The researchers achieved significantly higher accuracy and F1 scores compared to traditional models such as logistic regression and LSTM. By leveraging BERT’s deep contextual understanding, the study showcased how subtle linguistic cues that differentiate fake from real news can be effectively captured. This is highly applicable to our project, as it validates the use of BERT in social media-based fake news detection tasks and provides a blueprint for fine-tuning with domain-specific data in TensorFlow.
 
-- **Source 2**: [LIAR: A Benchmark Dataset for Fake News Detection]
+A pivotal dataset in this domain is introduced in “LIAR: A Benchmark Dataset for Fake News Detection” [https://aclanthology.org/P17-2067/](https://aclanthology.org/P17-2067/). This dataset contains over 12,000 labeled short statements from political contexts, annotated with six fine-grained classes ranging from "true" to "pants on fire". The paper experimented with models including CNNs and GRUs, but found that fine-grained classification of political claims remains a challenging task. Importantly, the authors note the value of incorporating metadata like speaker credibility. This dataset is especially relevant to our project as we intend to train and evaluate a BERT-based classifier using these granular truthfulness labels.
 
-  - **Link**: [https://aclanthology.org/P17-2067/](https://aclanthology.org/P17-2067/)  
-  - **Objective**: To introduce and benchmark the LIAR dataset, a large-scale dataset for fake news detection with six graded truth labels.  
-  - **Methods**: Utilized deep learning models such as CNNs and GRUs to classify short political statements.  
-  - **Outcomes**: Showed that existing models often misclassify nuanced linguistic data and highlighted dataset difficulty.  
-  - **Relation to the Project**: The LIAR dataset is suitable for model training and testing; also motivates the exploration of more powerful models like transformers.
+Finally, the survey “Fake News Detection on Social Media: A Data Mining Perspective” [https://arxiv.org/abs/1708.01967](https://arxiv.org/abs/1708.01967) offers a broad overview of fake news detection methods. It classifies existing approaches into content-based models (such as NLP-based classifiers) and context-based models (which use social features like propagation patterns and source credibility). The survey emphasizes the limitations of hand-crafted features and supports the growing trend toward deep learning solutions. This review is valuable for our project as it outlines the broader landscape of fake news detection, suggesting potential enhancements like incorporating metadata or network information into text classification models.
 
-- **Source 3**: [Fake News Detection on Social Media: A Data Mining Perspective]
+## Conclusion
 
-  - **Link**: [https://arxiv.org/abs/1708.01967](https://arxiv.org/abs/1708.01967)  
-  - **Objective**: To provide a comprehensive overview of techniques for detecting fake news using data mining and machine learning approaches.  
-  - **Methods**: Categorizes approaches into content-based (text analysis, NLP) and social context-based methods (user behavior, network propagation).  
-  - **Outcomes**: Found that NLP-based content analysis can be effective for early detection, but models struggle to generalize across domains.  
-  - **Relation to the Project**: Offers insight into foundational techniques and emphasizes the importance of considering both content and metadata.
+In summary, the reviewed works collectively demonstrate that transformer-based models—especially BERT—are highly effective for text classification tasks, including fake news detection. With access to robust datasets like LIAR and prior success in social media misinformation tasks, our project will focus on implementing and fine-tuning a BERT model using TensorFlow to build an accurate and context-aware fake news classifier. Future improvements may also involve integrating metadata and user behavior to further enhance prediction accuracy.
