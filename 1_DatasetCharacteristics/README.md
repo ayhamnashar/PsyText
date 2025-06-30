@@ -1,24 +1,25 @@
+
 # Dataset Characteristics
 
 **[Notebook](exploratory_data_analysis.ipynb)**
 
+# 🧠 Hate Speech Detection – Exploratory Data Analysis (EDA)
 
-# 🧠 Fake News Detection – Exploratory Data Analysis (EDA)
-
-This document provides a structured overview of the exploratory data analysis performed on the **WELFake** dataset, used for training and evaluating machine learning models in the task of fake news classification.
+This document provides a structured overview of the exploratory data analysis performed on the **Hate Speech and Offensive Language Dataset**, used for training and evaluating machine learning models in the task of hate speech classification.
 
 ---
 
 ## 📊 Dataset Overview
 
-The dataset consists of a collection of labeled news articles designed for fake news detection. Key details:
+The dataset consists of tweets annotated for hate speech, offensive language, or neither. Key details:
 
-- **Source**: WELFake dataset  
-- **Number of Samples**: ~72,000  
-- **Number of Features**: 4 (title, text, label, and id)  
-- **Label Distribution**: The `label` column is binary, where:  
-  - `0` = Fake  
-  - `1` = Real  
+- **Source**: [Hate Speech and Offensive Language Dataset (Davidson et al., 2017)](https://arxiv.org/abs/1703.04009)  
+- **Number of Samples**: ~25,000  
+- **Number of Features**: Common features include `tweet`, `class`, and optional metadata like `user`, `count`, etc.  
+- **Label Distribution**: The `class` column is multiclass:
+  - `0` = Hate Speech  
+  - `1` = Offensive Language  
+  - `2` = Neither  
 
 Example row:
 ```python
@@ -35,8 +36,8 @@ Missing values were checked across all columns.
 df.isnull().sum()
 ```
 
-- **Findings**: No missing values were found in the dataset.  
-- ✅ Clean dataset ready for preprocessing.
+- **Findings**: Minimal or no missing values were observed.  
+- ✅ Dataset is clean and suitable for preprocessing.
 
 ---
 
@@ -46,16 +47,16 @@ A breakdown of major feature distributions:
 
 - **Label Balance**:
 ```python
-sns.countplot(x='label', data=df)
+sns.countplot(x='class', data=df)
 ```
-The dataset is relatively **balanced** between fake and real news.
+The dataset is **imbalanced**, with the majority of tweets labeled as offensive language.
 
-- **Text Length Distribution**:
+- **Tweet Length Distribution**:
 ```python
-df['text_length'] = df['text'].apply(len)
-sns.histplot(df['text_length'], bins=50)
+df['tweet_length'] = df['tweet'].apply(len)
+sns.histplot(df['tweet_length'], bins=50)
 ```
-Most articles fall within a moderate length range, with outliers present on both ends.
+Tweet lengths are short, consistent with Twitter’s character limit. Most tweets range from 20 to 120 characters.
 
 ---
 
@@ -63,27 +64,27 @@ Most articles fall within a moderate length range, with outliers present on both
 
 Potential sources of bias considered:
 
-- **Source Bias**: Limited source diversity might affect generalization.  
-- **Length Bias**: Fake vs. real articles may have different average lengths.  
-- **Lexical Bias**: Certain words may be overrepresented in one class.
+- **Class Imbalance**: Overrepresentation of offensive language may affect classifier fairness.  
+- **Linguistic Bias**: Certain dialects or slang could be misclassified as hate speech.  
+- **Annotation Subjectivity**: Judging offensiveness is inherently subjective, potentially introducing human labeling bias.
 
-Due to the absence of metadata like author or publication, deeper source-level bias could not be analyzed.
+Careful model evaluation with fairness metrics is recommended due to these concerns.
 
 ---
 
 ## 🔗 Correlations
 
-A correlation heatmap was generated to analyze relationships between numerical features:
+A correlation heatmap was generated to analyze relationships between numerical features (e.g., retweet count, user-level metadata):
 
 ```python
-sns.heatmap(df.corr(), annot=True)
+sns.heatmap(df.corr(numeric_only=True), annot=True)
 ```
 
-- The `label` column has no strong linear correlation with available features.  
-- NLP techniques (e.g., TF-IDF, word embeddings) will be required for more meaningful feature extraction.
+- Weak linear correlations between label and numeric metadata.
+- For semantic patterns, advanced NLP techniques (e.g., embeddings, transformers) will be required.
 
 ---
 
 ## 📌 Conclusion
 
-The dataset is clean and well-suited for text classification tasks. Although linear correlations are minimal, deep NLP modeling such as BERT or LSTM will help uncover more meaningful patterns between text and labels. Next steps involve preprocessing, feature engineering, and model development using TensorFlow.
+The dataset is clean and well-structured for hate speech classification. While traditional correlations are weak, deep learning models like BERT can capture complex patterns in language that distinguish between hate speech, offensive content, and neutral language. Next steps include preprocessing, class rebalancing, and training using modern NLP models.
