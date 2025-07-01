@@ -2,7 +2,7 @@
 
 ## Repository Link
 
-[https://github.com/ayhamnashar/PsyText]
+https://github.com/ayhamnashar/PsyText
 
 ## Description
 
@@ -16,7 +16,7 @@ Text Classification
 
 - **Best Model:** Linear SVM (Support Vector Machine)
 - **Evaluation Metric:** Accuracy (also compared F1-score and recall)
-- **Result:** Linear SVM achieved ~89.1% accuracy on the test set. The neural network achieved ~79.4% accuracy.
+- **Result:** Linear SVM achieved ~89.1% accuracy on the test set. The neural network achieved ~80.8% accuracy.
 
 ## Documentation
 
