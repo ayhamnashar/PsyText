@@ -1,22 +1,22 @@
-# [Your Project Title Here]
+# PsyText: Hate Speech and Offensive Language Detection
 
 ## Repository Link
 
-[https://github.com/your_username/your_project_name]
+[https://github.com/ayhamnashar/PsyText]
 
 ## Description
 
-[Short project description here. Briefly summarize the problem you are trying to solve and the approach you're taking.]
+PsyText is a machine learning project focused on detecting hate speech and offensive language in social media text. The goal is to classify tweets into three categories: Hate Speech, Offensive Language, or Neither. The project compares traditional machine learning models with a deep learning approach to evaluate their effectiveness on this task.
 
 ### Task Type
 
-[Image Classification / Chatbot / Regression / Clustering / Other]
+Text Classification
 
 ### Results Summary
 
-- **Best Model:** [Name of the best-performing model]
-- **Evaluation Metric:** [e.g., Accuracy, F1-Score, MSE]
-- **Result:** [e.g., 95% accuracy, F1-score of 0.8]
+- **Best Model:** Linear SVM (Support Vector Machine)
+- **Evaluation Metric:** Accuracy (also compared F1-score and recall)
+- **Result:** Linear SVM achieved ~89.1% accuracy on the test set. The neural network achieved ~79.4% accuracy.
 
 ## Documentation
 
